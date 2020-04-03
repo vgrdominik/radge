@@ -46,7 +46,7 @@ export default {
     },
 
     mounted() {
-        this.setIsContainerNeeded(false)
+        this.setIsContainerNeeded(true)
 
         this.running_install_event = (event, args) => {
             console.log(args)

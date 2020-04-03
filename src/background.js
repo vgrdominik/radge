@@ -24,7 +24,6 @@ function createWindow () {
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
     win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
-    if (!process.env.IS_TEST) win.webContents.openDevTools()
   } else {
     createProtocol('app')
     // Load the index.html when not in development
@@ -173,16 +172,17 @@ ipcMain.on('exec_tpv', function () {
 
   const execFile = require('child_process').execFile
   let args = [
+    '--prefix',
+    app.getAppPath() + '/../src/tpv',
     'run',
     'electron:serve',
   ]
-  execFile('npm', args, (error, stdout, stderr) => {
+  execFile((/^win/.test(process.platform)) ? 'npm.cmd' : 'npm', args, (error, stdout, stderr) => {
     if (error) {
       console.error('stderr', stderr)
       throw error
     }
 
-    checkIsInstalled()
     console.log('stdout', stdout)
   });
 

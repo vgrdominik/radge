@@ -1,6 +1,3 @@
-import {remote} from "electron";
-import {ipcRenderer} from "electron";
-import {ipcRenderer} from "electron";
 <template>
   <v-app id="inspire">
     <v-navigation-drawer
@@ -56,7 +53,7 @@ import {ipcRenderer} from "electron";
                   link
           >
             <v-list-item-action @click="goToApp(item)">
-              <CtIcon :icon="item.icon" class="primary--text" />
+              <CtIcon :title="item.text" :icon="item.icon" class="primary--text" />
             </v-list-item-action>
             <v-list-item-content @click="goToApp(item)">
               <v-list-item-title class="primary--text">
@@ -69,7 +66,7 @@ import {ipcRenderer} from "electron";
         <!-- TPV -->
         <v-list-item link>
           <v-list-item-action @click="execTpv()">
-            <CtIcon :icon="['fas', 'desktop']" class="primary--text" />
+            <CtIcon title="TPV" :icon="['fas', 'desktop']" class="primary--text" />
           </v-list-item-action>
           <v-list-item-content @click="execTpv()">
             <v-list-item-title class="primary--text">
@@ -81,7 +78,7 @@ import {ipcRenderer} from "electron";
         <!-- Exit -->
         <v-list-item link>
           <v-list-item-action @click="exit()">
-            <CtIcon :icon="['fas', 'sign-out-alt']" class="primary--text" />
+            <CtIcon title="Salir" :icon="['fas', 'sign-out-alt']" class="primary--text" />
           </v-list-item-action>
           <v-list-item-content @click="exit()">
             <v-list-item-title class="primary--text">
@@ -308,9 +305,9 @@ export default {
     // In development mode
     document.addEventListener("keydown", function (e) {
       if (e.which === 123) {
-        remote.getCurrentWindow().toggleDevTools();
+        remote.getCurrentWindow().toggleDevTools()
       } else if (e.which === 116) {
-        location.reload();
+        location.reload()
       }
     })
     // End in development mode
