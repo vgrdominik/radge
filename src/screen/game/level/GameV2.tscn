@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://game/player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/design/Escenas/Ciudades/Manresa/ContenedorCiudadManresaPlazaCataluna.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/level/Game.gd" type="Script" id=3]
+[ext_resource path="res://game/design/Escenas/Edificios/ContenedorCasa2.tscn" type="PackedScene" id=4]
+
+[node name="GameV2" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="ContenedorCiudadManresaPlazaCataluna" parent="." instance=ExtResource( 2 )]
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.54477, 1.17052, 11.6523 )
+
+[node name="ContenedorCasa2" parent="." instance=ExtResource( 4 )]
+transform = Transform( -4, 0, -1.30337e-06, 0, 4, 0, 1.30337e-06, 0, -4, 65.2513, 0.257791, -3.95465 )

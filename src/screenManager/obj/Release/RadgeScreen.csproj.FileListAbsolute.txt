@@ -1,0 +1,14 @@
+E:\ValentiGamez\Projects\radge\src\screenManager\bin\Release\RadgeScreen.exe.config
+E:\ValentiGamez\Projects\radge\src\screenManager\bin\Release\RadgeScreen.exe
+E:\ValentiGamez\Projects\radge\src\screenManager\bin\Release\RadgeScreen.pdb
+E:\ValentiGamez\Projects\radge\src\screenManager\obj\Release\RadgeScreen.csprojAssemblyReference.cache
+E:\ValentiGamez\Projects\radge\src\screenManager\obj\Release\MainWindow.g.cs
+E:\ValentiGamez\Projects\radge\src\screenManager\obj\Release\App.g.cs
+E:\ValentiGamez\Projects\radge\src\screenManager\obj\Release\RadgeScreen_MarkupCompile.cache
+E:\ValentiGamez\Projects\radge\src\screenManager\obj\Release\RadgeScreen_MarkupCompile.lref
+E:\ValentiGamez\Projects\radge\src\screenManager\obj\Release\MainWindow.baml
+E:\ValentiGamez\Projects\radge\src\screenManager\obj\Release\RadgeScreen.g.resources
+E:\ValentiGamez\Projects\radge\src\screenManager\obj\Release\RadgeScreen.Properties.Resources.resources
+E:\ValentiGamez\Projects\radge\src\screenManager\obj\Release\RadgeScreen.csproj.GenerateResource.cache
+E:\ValentiGamez\Projects\radge\src\screenManager\obj\Release\RadgeScreen.exe
+E:\ValentiGamez\Projects\radge\src\screenManager\obj\Release\RadgeScreen.pdb

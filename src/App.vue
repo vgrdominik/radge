@@ -1,60 +1,221 @@
+import {ipcRenderer} from "electron";
+import {ipcRenderer} from "electron";
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
+  <v-app id="inspire">
+    <v-navigation-drawer
+            v-model="drawer"
+            :clipped="$vuetify.breakpoint.lgAndUp"
+            app
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+      <v-list dense>
+        <template v-for="item in items">
+          <v-row
+                  v-if="item.heading"
+                  :key="item.heading"
+                  align="center"
+          >
+            <v-col cols="12">
+              <v-subheader v-if="item.heading">
+                {{ item.heading }}
+              </v-subheader>
+            </v-col>
+          </v-row>
+          <v-list-group
+                  v-else-if="item.children"
+                  :key="item.text"
+                  v-model="item.model"
+                  append-icon=""
+          >
+            <template v-slot:activator>
+              <v-list-item-content @click="$router.push({ path: item.path })">
+                <v-list-item-title class="primary--text">
+                  {{ item.text }}
+                </v-list-item-title>
+              </v-list-item-content>
+            </template>
+            <v-list-item
+                    v-for="(child, i) in item.children"
+                    :key="i"
+                    link
+            >
+              <v-list-item-action v-if="child.icon" @click="$router.push({ path: child.path })">
+                <CtIcon :icon="child.icon" class="primary--text" />
+              </v-list-item-action>
+              <v-list-item-content @click="$router.push({ path: child.path })">
+                <v-list-item-title class="primary--text">
+                  {{ child.text }}
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-group>
+          <v-list-item
+                  v-else
+                  :key="item.text"
+                  link
+          >
+            <v-list-item-action @click="$router.push({ path: item.path })">
+              <CtIcon :icon="item.icon" class="primary--text" />
+            </v-list-item-action>
+            <v-list-item-content @click="$router.push({ path: item.path })">
+              <v-list-item-title class="primary--text">
+                {{ item.text }}
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
+      </v-list>
+    </v-navigation-drawer>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+    <v-app-bar
+            :clipped-left="$vuetify.breakpoint.lgAndUp"
+            app
+            dark
+            color="primary"
+    >
+      <CtBtn type="icon" :icon="['fas', 'chevron-left']" @click="$router.go(-1)" class="mr-3" />
 
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-toolbar-title
+              style="width: 300px"
+              class="ml-0 pl-4"
       >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
+        <CtBtn type="text" color="white" to="/">Radge</CtBtn>
+      </v-toolbar-title>
+      <v-spacer />
 
+      <CtBtn type="text" :disabled="! is_installed" color="white" to="/jugar">
+        Jugar
+      </CtBtn>
+      |
+      <template v-if="user">
+        <CtBtn type="text" color="white" @click="logout()">
+          Salir
+        </CtBtn>
+      </template>
+      <template v-else>
+        <CtBtn type="text" color="white" to="/login">
+          Login
+        </CtBtn>
+        |
+        <CtBtn type="text" color="white" to="/registro">
+          Registro gratuito
+        </CtBtn>
+      </template>
+      <CtBtn type="icon" :icon="['fas', 'bell']" to="/notificaciones" />
+    </v-app-bar>
     <v-content>
-      <HelloWorld/>
+      <v-container class="fill-height" fluid>
+        <router-view></router-view>
+      </v-container>
     </v-content>
+
+    <v-footer padless>
+      <CtCard type="empty" flat tile width="100%" class="primary white--text text-center">
+        <v-card-text>
+          <CtBtn v-for="footerItem in footerItems" :key="footerItem.title" type="icon" target="_blank" :title="footerItem.title" :href="footerItem.href" :icon="footerItem.icon" class="mx-4 white--text" />
+        </v-card-text>
+
+        <v-card-text class="white--text pt-0">
+          Recuerda divertirte con Radge!
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-text class="white--text">
+          <CtBtn type="text" color="white">Condiciones</CtBtn>
+          <CtBtn type="text" color="white">{{ new Date().getFullYear() }} — Valentí Gàmez</CtBtn>
+        </v-card-text>
+      </CtCard>
+    </v-footer>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import { mapMutations, mapActions } from 'vuex'
+import { ipcRenderer } from 'electron'
 
 export default {
-  name: 'App',
-
-  components: {
-    HelloWorld,
+  props: {
+    source: String,
   },
 
   data: () => ({
-    //
+    is_installed: false,
+    check_is_installed_event: null,
+    dialog: false,
+    drawer: null,
+    items: [
+      { icon: ['fas', 'asterisk'], text: 'Día a día', path: '/dia-a-dia' },
+    ],
+    footerItems: [
+      {
+        href: 'https://www.facebook.com/iamvalentigamez',
+        icon: ['fab', 'facebook'],
+        title: 'Página de Facebook',
+      },
+      {
+        href: 'https://twitter.com/iamvalentigamez',
+        icon: ['fab', 'twitter'],
+        title: 'Pperfil de Twitter',
+      },
+      {
+        href: 'https://www.instagram.com/iamvalentigamez/',
+        icon: ['fab', 'instagram'],
+        title: 'Perfil de Instagram',
+      },
+      {
+        href: 'https://www.linkedin.com/in/valent%C3%AD-g%C3%A0mez-rojas-5919b073/',
+        icon: ['fab', 'linkedin'],
+        title: 'Perfil laboral en Linkedin',
+      },
+      {
+        href: 'https://www.youtube.com/vgrdominik',
+        icon: ['fab', 'youtube'],
+        title: 'Canal de programación',
+      },
+    ],
   }),
-};
+
+  computed: {
+    user () {
+      return this.$store.state.user.user
+    }
+  },
+
+  mounted() {
+    this.check_is_installed_event = (event, args) => {
+      this.is_installed = args
+      console.log('Is installed: ' + args)
+    }
+    ipcRenderer.on('check_is_installed', this.check_is_installed_event)
+    this.checkInstall()
+  },
+
+  methods: {
+    checkInstall() {
+      ipcRenderer.send('check_is_installed')
+    },
+
+    afterLogout(){
+      this.setToken('')
+      this.removeUser()
+      setTimeout(() => this.$router.push({ path: '/' }), 2000)
+    },
+
+    logout () {
+      this.$axios.post('/api/logout', {},{
+        headers: { Authorization: 'Bearer ' + this.$store.state.user.token }
+      })
+              .then(() => this.afterLogout())
+    },
+
+    ...mapActions({
+      setToken: 'user/setToken',
+    }),
+
+    ...mapMutations({
+      removeUser: 'user/removeUser',
+    }),
+  },
+}
 </script>

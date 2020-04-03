@@ -1,0 +1,42 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://game/player/modelWithAnimations.dae" type="PackedScene" id=1]
+[ext_resource path="res://game/player/Mannequiny.gd" type="Script" id=2]
+
+[sub_resource type="AnimationNodeAnimation" id=1]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=2]
+animation = "Jump"
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "Run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=4]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=5]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=6]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=7]
+
+[sub_resource type="AnimationNodeStateMachine" id=8]
+states/Idle/node = SubResource( 1 )
+states/Idle/position = Vector2( 267, 78 )
+states/Jump/node = SubResource( 2 )
+states/Jump/position = Vector2( 267, 186 )
+states/Run/node = SubResource( 3 )
+states/Run/position = Vector2( 476, 78 )
+transitions = [ "Idle", "Jump", SubResource( 4 ), "Jump", "Idle", SubResource( 5 ), "Idle", "Run", SubResource( 6 ), "Run", "Idle", SubResource( 7 ) ]
+start_node = "Idle"
+graph_offset = Vector2( 0, 28.178 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=9]
+
+[node name="Mannequiny" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource( 8 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 9 )
