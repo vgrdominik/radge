@@ -33,6 +33,7 @@
 
 <script>
 import { ipcRenderer } from 'electron'
+import {mapActions} from "vuex";
 export default {
 
     data() {
@@ -45,6 +46,8 @@ export default {
     },
 
     mounted() {
+        this.setIsContainerNeeded(false)
+
         this.running_install_event = (event, args) => {
             console.log(args)
         }
@@ -76,6 +79,13 @@ export default {
         checkInstall() {
             ipcRenderer.send('check_is_installed')
         },
+
+        ...mapActions('global', [
+            'setConfig',
+            'setConfigComplete',
+            'setIsContainerNeeded',
+            'setTimeToSync',
+        ]),
     },
 }
 </script>

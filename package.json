@@ -19,6 +19,8 @@
     "@fortawesome/vue-fontawesome": "^0.1.9",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "csv": "^0.3.7",
+    "underscore": "^1.9.2",
     "vue": "^2.6.11",
     "vue-router": "^3.1.6",
     "vuetify": "^2.2.11",
