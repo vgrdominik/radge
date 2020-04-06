@@ -57,7 +57,7 @@ namespace RadgeScreen
             pDocked = new Process();
             // pDocked.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             // pDocked.StartInfo.FileName = Environment.CurrentDirectory + @"radge_screen.exe");
-            pDocked.StartInfo.FileName = Environment.CurrentDirectory + @"/src/screenPack/radge_screen.exe";
+            pDocked.StartInfo.FileName = Environment.CurrentDirectory + @"/../../../screenPack/radge_screen.exe";
             // pDocked.StartInfo.FileName = "notepad.exe";
             // Trace.WriteLine(Environment.CurrentDirectory + @"../screenPack/radge_screen.exe");
             pDocked.Start();
@@ -81,12 +81,14 @@ namespace RadgeScreen
             mainPanel.SizeChanged += new SizeChangedEventHandler(MainPanel_Resize);
             //Perform an initial call to set the size.
             MainPanel_Resize(new Object(), new EventArgs());
+
+            this.screenInitButton.Visibility = Visibility.Hidden;
         }
 
         private void MainPanel_Resize(object sender, EventArgs e)
         {
             //Change the docked windows size to match its parent's size. 
-            MoveWindow(hWndDocked, 0, 0, Convert.ToInt32(mainPanel.Width), Convert.ToInt32(mainPanel.Height), true);
+            MoveWindow(hWndDocked, 60 + Convert.ToInt32(mainPanel.ActualWidth / 2), 10, Convert.ToInt32(mainPanel.ActualWidth / 2), Convert.ToInt32(mainPanel.ActualHeight / 2), true);
         }
     }
 }

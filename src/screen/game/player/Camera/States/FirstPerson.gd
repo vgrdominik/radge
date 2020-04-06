@@ -4,7 +4,7 @@ extends CameraState
 onready var tween: = $Tween
 
 export var fov: = 40.0
-export var offset_camera_position: = Vector3(0, -2.7, -3.7)
+export var offset_camera_position: = Vector3(0, -3.2, -4.7)
 export var camera_rotation_start: Vector3 = Vector3(0, 0, 0)
 var zoom_enabled = false
 const STATE_NAME = 'first_person'

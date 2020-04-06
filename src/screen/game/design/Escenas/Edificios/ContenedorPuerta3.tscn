@@ -1,0 +1,160 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://game/design/Escenas/Edificios/Wall_Prop_Door_Ornate.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/design/Escenas/Edificios/ContenedorPuerta1.gd" type="Script" id=4]
+
+[sub_resource type="ConvexPolygonShape" id=1]
+points = PoolVector3Array( -0.483873, 0.209197, 0.336932, -0.483873, 0.663268, -0.284289, -0.483873, 1.14067, 0.336932, -0.4779, 0.238313, 0.3619, -0.4779, 1.11156, 0.3619, -0.468331, 0.229179, 0.380538, -0.468331, 1.12069, 0.380538, -0.45998, -0.00597346, -0.343965, -0.45998, -0.00597346, 0.336932, -0.45998, 1.35597, -0.343965, -0.45998, 1.35597, 0.336932, -0.445587, 0.2282, 0.381329, -0.445587, 1.12167, 0.381329, -0.435099, 0.00809111, -0.348201, -0.435099, 0.499525, -0.348201, -0.434398, 0.017829, 0.348902, -0.434398, 1.33217, 0.348902, -0.3, 0.045747, -0.327323, -0.3, 0.045747, 0.334945, -0.3, 1.30425, -0.327323, -0.3, 1.30425, 0.334945 )
+
+[sub_resource type="CapsuleShape" id=2]
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "Close"
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "Open"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=5]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=6]
+
+[sub_resource type="AnimationNodeStateMachine" id=7]
+states/Close/node = SubResource( 3 )
+states/Close/position = Vector2( 494, 65 )
+states/Open/node = SubResource( 4 )
+states/Open/position = Vector2( 233, 65 )
+transitions = [ "Open", "Close", SubResource( 5 ), "Close", "Open", SubResource( 6 ) ]
+start_node = "Open"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=8]
+
+[sub_resource type="Animation" id=9]
+length = 1.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:rotation_degrees:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.5 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:rotation_degrees:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -90, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.5 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath(".:rotation_degrees:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.5 )
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("PuertaContenedor:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PuertaContenedor:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, -90, 0 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 1.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:rotation_degrees:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.5 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:rotation_degrees:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -90, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.5 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath(".:rotation_degrees:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.5 )
+}
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 4 )
+
+[node name="PuertaContenedor" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
+
+[node name="Wall_Prop_Door_Ornate" parent="PuertaContenedor" instance=ExtResource( 1 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.179, 0, -0.183 )
+
+[node name="Puerta1StaticBody" type="StaticBody" parent="PuertaContenedor"]
+transform = Transform( 0.500001, 0, 0, 0, 0.5, 0, 0, 0, 0.500001, 0, 0, 0.1 )
+
+[node name="Puerta1CollisionShape" type="CollisionShape" parent="PuertaContenedor/Puerta1StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.358909, 0, -0.566664 )
+shape = SubResource( 1 )
+
+[node name="Puerta1AccionArea" type="Area" parent="PuertaContenedor"]
+transform = Transform( 0.500001, 0, 0, 0, 0.5, 0, 0, 0, 0.500001, -0.004, 0, 0.051 )
+
+[node name="Puerta1AccionCollisionShape" type="CollisionShape" parent="PuertaContenedor/Puerta1AccionArea"]
+transform = Transform( -8.14603e-08, 3.18518e-14, -0.5, 1.62921e-07, 0.6, 0, -0.5, 1.95505e-07, 8.14603e-08, -0.0410908, 0.7, -0.466664 )
+shape = SubResource( 2 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 7 )
+anim_player = NodePath("../AnimationPlayer")
+process_mode = 0
+parameters/playback = SubResource( 8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../PuertaContenedor")
+autoplay = "Idle"
+anims/Close = SubResource( 9 )
+anims/Idle = SubResource( 10 )
+anims/Open = SubResource( 11 )
+[connection signal="body_entered" from="PuertaContenedor/Puerta1AccionArea" to="." method="_on_Puerta1AccionArea_body_entered"]
+[connection signal="body_exited" from="PuertaContenedor/Puerta1AccionArea" to="." method="_on_Puerta1AccionArea_body_exited"]

@@ -43,6 +43,8 @@ shape = SubResource( 2 )
 spring_length = 4.5
 margin = 0.5
 script = ExtResource( 8 )
+length_range = Vector2( 3, 6 )
+zoom = 0.5
 
 [node name="CameraTarget" type="Position3D" parent="SpringArm"]
 transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0 )

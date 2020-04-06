@@ -4,9 +4,6 @@
 [ext_resource path="res://game/design/Modelos/Edificios/White.material" type="Material" id=2]
 [ext_resource path="res://game/design/Escenas/Edificios/ContenedorPuerta1.gd" type="Script" id=3]
 
-
-
-
 [sub_resource type="CapsuleShape" id=1]
 
 [sub_resource type="BoxShape" id=2]

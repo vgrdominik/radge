@@ -11,14 +11,12 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="{md:MaterialDesignFont}"
-        Title="Radge Screen" Height="450" Width="800">
+        Title="Radge Screen">
     <Grid>
-        <md:Card Padding="32" Margin="16">
-            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}">
-                My First Material Design App
-                <Button x:Name="button" Click="button_Click" Width="187" Style="{DynamicResource MaterialDesignRaisedButton}">Click here to open Notepad Below</Button>
-                <StackPanel x:Name="MainPanel" Height="257" Width="489" Margin="100,0,0,0"/>
-            </TextBlock>
+        <md:Card Padding="5" Margin="10">
+            <StackPanel x:Name="MainPanel" Margin="0" UseLayoutRounding="False">
+                <Button x:Name="screenInitButton" Click="button_Click" Width="187" Style="{DynamicResource MaterialDesignRaisedButton}">Iniciar screen</Button>
+            </StackPanel>
         </md:Card>
 
     </Grid>

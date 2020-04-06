@@ -167,6 +167,7 @@ ipcMain.on('play', function () {
   win.webContents.send('running_play', playContent)
 })
 
+/* Compliling, only in dev
 ipcMain.on('exec_tpv', function () {
   let playContent = 'Ejecutando TPV'
 
@@ -186,6 +187,23 @@ ipcMain.on('exec_tpv', function () {
     console.log('stdout', stdout)
   });
 
+
+  win.webContents.send('running_tpv', playContent)
+})
+*/
+ipcMain.on('exec_tpv', function () {
+  let playContent = 'Ejecutando TPV'
+
+  const exec = require('child_process').exec;
+
+  exec(app.getAppPath() + '/../src/tpv/dist_electron/win-unpacked/tpv.exe', (e, stdout, stderr)=> {
+    if (e instanceof Error) {
+      console.error(e);
+      throw e;
+    }
+    console.log('stdout ', stdout);
+    console.log('stderr ', stderr);
+  });
 
   win.webContents.send('running_tpv', playContent)
 })

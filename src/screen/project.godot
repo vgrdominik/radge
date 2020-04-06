@@ -60,6 +60,10 @@ config/name="Radge"
 run/main_scene="res://game/level/GameV2.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/borderless=true
+
 [input]
 
 move_front={

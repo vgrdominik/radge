@@ -36,7 +36,7 @@ graph_offset = Vector2( 0, 28.178 )
 [node name="Mannequiny" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="1"]
 tree_root = SubResource( 8 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 9 )
