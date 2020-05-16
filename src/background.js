@@ -154,7 +154,7 @@ ipcMain.on('play', function () {
 
   const exec = require('child_process').exec;
 
-  exec(app.getAppPath() + '/../src/screenManager/obj/Release/RadgeScreen.exe', (e, stdout, stderr)=> {
+  exec(app.getAppPath() + '/../src/screenManager/bin/Release/RadgeScreen.exe', (e, stdout, stderr)=> {
     if (e instanceof Error) {
       console.error(e);
       throw e;

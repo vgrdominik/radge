@@ -89,6 +89,14 @@ func update_rotation(offset: Vector2) -> void:
 	rotationVector3.x = clamp(rotationVector3.x, ANGLE_X_MIN, ANGLE_X_MAX)
 	rotationVector3.z = 0
 	
+	if _state_machine._state_name == 'FirstPerson':
+		var playerRotationVector3 = camera_rig.player.rotation
+		playerRotationVector3.y -= offset.x * -1.0 if is_x_inverted else offset.x
+		playerRotationVector3.x += offset.y * -1.0 if is_y_inverted else offset.y
+		playerRotationVector3.x = clamp(playerRotationVector3.x, ANGLE_X_MIN, ANGLE_X_MAX)
+		playerRotationVector3.z = 0
+		camera_rig.player.rotation = playerRotationVector3
+	
 	camera_rig.rotation = rotationVector3
 	
 	# OLD WAY

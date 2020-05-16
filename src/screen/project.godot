@@ -57,7 +57,8 @@ _global_script_class_icons={
 [application]
 
 config/name="Radge"
-run/main_scene="res://game/level/GameV2.tscn"
+run/main_scene="res://game/level/GameV3.tscn"
+boot_splash/image="res://assets/img/splashScreen.png"
 config/icon="res://icon.png"
 
 [display]

@@ -12,3 +12,10 @@ E:\ValentiGamez\Projects\radge\src\screenManager\obj\Release\RadgeScreen.Propert
 E:\ValentiGamez\Projects\radge\src\screenManager\obj\Release\RadgeScreen.csproj.GenerateResource.cache
 E:\ValentiGamez\Projects\radge\src\screenManager\obj\Release\RadgeScreen.exe
 E:\ValentiGamez\Projects\radge\src\screenManager\obj\Release\RadgeScreen.pdb
+E:\ValentiGamez\Projects\radge\src\screenManager\bin\Release\MaterialDesignColors.dll
+E:\ValentiGamez\Projects\radge\src\screenManager\bin\Release\MaterialDesignThemes.Wpf.dll
+E:\ValentiGamez\Projects\radge\src\screenManager\bin\Release\MaterialDesignColors.pdb
+E:\ValentiGamez\Projects\radge\src\screenManager\bin\Release\MaterialDesignThemes.Wpf.pdb
+E:\ValentiGamez\Projects\radge\src\screenManager\bin\Release\MaterialDesignThemes.Wpf.xml
+E:\ValentiGamez\Projects\radge\src\screenManager\obj\Release\App.baml
+E:\ValentiGamez\Projects\radge\src\screenManager\obj\Release\RadgeScreen.csproj.CopyComplete
