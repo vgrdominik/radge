@@ -6,7 +6,7 @@ class_name Mannequiny
 # state names to translate them into the states for the animation tree.
 
 
-enum States {IDLE, RUN, AIR}
+enum States {IDLE, RUN, AIR, INTERACT}
 
 onready var animation_tree: AnimationTree = $AnimationTree
 onready var _playback: AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
@@ -37,5 +37,7 @@ func transition_to(state_id: int) -> void:
 			_playback.travel("Run")
 		States.AIR:
 			_playback.travel("Jump")
+		States.INTERACT:
+			_playback.travel("Interact_standing")
 		_:
 			_playback.travel("Idle")

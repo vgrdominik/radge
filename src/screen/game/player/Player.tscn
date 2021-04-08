@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://game/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://game/player/Mannequiny.tscn" type="PackedScene" id=2]
@@ -8,10 +8,11 @@
 [ext_resource path="res://game/player/States/Air.gd" type="Script" id=6]
 [ext_resource path="res://game/player/States/Run.gd" type="Script" id=7]
 [ext_resource path="res://game/player/Camera/CameraRig.tscn" type="PackedScene" id=8]
+[ext_resource path="res://game/player/Interact.gd" type="Script" id=9]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=3]
 
-[sub_resource type="CapsuleShape" id=1]
+[sub_resource type="CapsuleShape" id=2]
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -20,11 +21,11 @@ script = ExtResource( 1 )
 transform = Transform( -0.45, 0, -1.75236e-07, 0, 0.45, 0, 1.75236e-07, 0, -0.45, 0, 0, 0 )
 
 [node name="AnimationTree" parent="Mannequiny" index="1"]
-parameters/playback = SubResource( 2 )
+parameters/playback = SubResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 0.5, 0, 0, 0, -4.37114e-08, -0.6, 0, 1, -2.62268e-08, 0, 0.875, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -39,6 +40,9 @@ script = ExtResource( 5 )
 
 [node name="Air" type="Node" parent="StateMachine/Move"]
 script = ExtResource( 6 )
+
+[node name="Interact" type="Node" parent="StateMachine/Move"]
+script = ExtResource( 9 )
 
 [node name="Run" type="Node" parent="StateMachine/Move"]
 script = ExtResource( 7 )

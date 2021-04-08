@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://game/player/modelWithAnimations.dae" type="PackedScene" id=1]
 [ext_resource path="res://game/player/Mannequiny.gd" type="Script" id=2]
@@ -7,12 +7,13 @@
 animation = "Idle"
 
 [sub_resource type="AnimationNodeAnimation" id=2]
-animation = "Jump"
+animation = "Interact_standing"
 
 [sub_resource type="AnimationNodeAnimation" id=3]
-animation = "Run"
+animation = "Jump"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=4]
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "Run"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=5]
 
@@ -20,23 +21,31 @@ animation = "Run"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=7]
 
-[sub_resource type="AnimationNodeStateMachine" id=8]
+[sub_resource type="AnimationNodeStateMachineTransition" id=8]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+
+[sub_resource type="AnimationNodeStateMachine" id=11]
 states/Idle/node = SubResource( 1 )
 states/Idle/position = Vector2( 267, 78 )
-states/Jump/node = SubResource( 2 )
+states/Interact_standing/node = SubResource( 2 )
+states/Interact_standing/position = Vector2( 27.3243, 78 )
+states/Jump/node = SubResource( 3 )
 states/Jump/position = Vector2( 267, 186 )
-states/Run/node = SubResource( 3 )
+states/Run/node = SubResource( 4 )
 states/Run/position = Vector2( 476, 78 )
-transitions = [ "Idle", "Jump", SubResource( 4 ), "Jump", "Idle", SubResource( 5 ), "Idle", "Run", SubResource( 6 ), "Run", "Idle", SubResource( 7 ) ]
+transitions = [ "Idle", "Jump", SubResource( 5 ), "Jump", "Idle", SubResource( 6 ), "Idle", "Run", SubResource( 7 ), "Run", "Idle", SubResource( 8 ), "Idle", "Interact_standing", SubResource( 9 ), "Interact_standing", "Idle", SubResource( 10 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 0, 28.178 )
+graph_offset = Vector2( -110.676, 28.178 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=9]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=12]
 
 [node name="Mannequiny" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="1"]
-tree_root = SubResource( 8 )
+tree_root = SubResource( 11 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 9 )
+parameters/playback = SubResource( 12 )
